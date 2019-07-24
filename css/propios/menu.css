@@ -1,0 +1,159 @@
+
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+  margin:0;
+  padding:0;
+}
+html,body {
+  margin:0;
+  padding:0;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+fieldset,img { 
+  border:0;
+}
+input{
+  border:1px solid #b0b0b0;
+  padding:3px 5px 4px;
+  color:#979797;
+  width:190px;
+}
+address,caption,cite,code,dfn,th,var {
+  font-style:normal;
+  font-weight:normal;
+}
+ol,ul {
+  list-style:none;
+}
+caption,th {
+  text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+q:before,q:after {
+  content:'';
+}
+abbr,acronym { border:0;
+}
+
+
+
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+  
+ .sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #4e4747;
+  display: block;
+  transition: 0.3s;
+}
+  
+.sidenav a:hover {
+  color: #208feb;
+}
+  
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+header{
+  margin: auto;
+  border: 0px;
+  height: 60px;
+  background-color: rgba(35, 128, 190, 0.842);
+}
+#titulo{
+  margin-top: 10px;
+  font-size: 20px;
+}
+.panel{
+  /*background-color: cornflowerblue;*/
+  width: 96%;
+  margin-left: 2%;
+}
+
+.submenu{
+  margin-left: 15px;
+}
+.perfil{
+  margin-left: 30px;
+}
+
+
+.hamburguesa{
+  width: 15%;
+ 
+}
+.hamburguesa span{
+  margin-left: 30px;
+
+}
+
+
+/*etexto de nuestro nav*/
+.encabezado{
+  width: 60%;
+  text-align: center;
+}
+
+/*boto para session*/
+.config{
+  width: 25%;
+  margin-top: 5px;
+  text-align: right;
+}
+.btn-config{
+  margin-right: 30px;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+/* estilos para el movil*/
+@media only screen and (max-width: 600px) {
+  .config{
+    width: 100%;
+    background-color: rgba(35, 128, 190, 0.842);
+    margin-top: 15px;
+  }
+  .hamburguesa span{
+    margin: 0px 40px 10px 0px;
+  }
+  
+  .encabezado{
+    width: 70%;
+  }
+  .hamburguesa{
+    width: 30%;
+  }
+}
+
+/*estilos para la tablet*/
+@media only screen and (min-width: 768px) {
+
+} 
+
+

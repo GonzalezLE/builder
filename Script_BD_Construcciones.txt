@@ -1,0 +1,97 @@
+create DATABASE BD_Construcciones;
+use BD_Construcciones;
+create table Status(id_status tinyint not null, nombre varchar(255),
+                   CONSTRAINT PK_Status PRIMARY KEY (id_status));
+
+create table Estado(id_estado TINYINT not null AUTO_INCREMENT, nombre varchar(255), 
+                    CONSTRAINT PK_Estado primary key (id_estado));
+
+create table Puestos(id_puesto SMALLINT not null AUTO_INCREMENT, nombre varchar(255),
+                    CONSTRAINT PK_PUestos PRIMARY KEY (id_puesto));
+
+CREATE TABLE Unidad_Medida(id_medida TINYINT not null AUTO_INCREMENT, nombre varchar(255),
+                          CONSTRAINT PK_Unidad_Medida PRIMARY KEY (id_medida));
+
+CREATE TABLE Marca(id_marca SMALLINT not null AUTO_INCREMENT, nombre varchar(255),
+                  CONSTRAINT PK_Marca PRIMARY KEY (id_marca));
+
+CREATE TABLE Proveedores(id_proveedor SMALLINT not null AUTO_INCREMENT, nombre varchar(255),
+                        telefono varchar(255),
+                        CONSTRAINT PK_Proveedores PRIMARY KEY (id_proveedor));
+
+CREATE TABLE Encargado(id_encargado int not null AUTO_INCREMENT, nombre varchar(255),
+                      apepat varchar(255), apemat varchar(255), telefono varchar(255),
+                      sueldo float,
+                      CONSTRAINT PK_Encargado PRIMARY KEY(id_encargado));
+
+CREATE TABLE Duenio(id_duenio int not null AUTO_INCREMENT, nombre varchar(255), 
+                    apepat varchar(255),apemat varchar(255),telefono varchar(255),
+                   CONSTRAINT PK_Duenio PRIMARY KEY(id_duenio));
+
+CREATE TABLE Ciudad(id_ciudad int not null AUTO_INCREMENT,nombre varchar(255),
+                   id_estado TINYINT not null,
+                   CONSTRAINT PK_Ciudad PRIMARY KEY (id_ciudad),
+                   CONSTRAINT FK_Estado
+                   FOREIGN KEY (id_estado) REFERENCES Estado(id_estado));
+
+CREATE table Trabajadores(id_trabajador int not null AUTO_INCREMENT, nombre varchar(255),
+                         apepat varchar(255),apemat varchar(255),id_puesto SMALLINT not null,
+                         telefono varchar(255),
+                         CONSTRAINT PK_Trabajadores PRIMARY KEY (id_trabajador),
+                         CONSTRAINT FK_Puestos
+                         FOREIGN KEY (id_puesto) REFERENCES Puestos(id_puesto));
+
+CREATE TABLE Materiales(id_material int not null AUTO_INCREMENT, descripcion text,
+                       id_marca SMALLINT not null, id_medida TINYINT not null,
+                       imagen text, existencias float,
+                       CONSTRAINT PK_Materiales PRIMARY KEY (id_material),
+                       CONSTRAINT FK_Marca
+                       FOREIGN KEY (id_marca) REFERENCES Marca(id_marca),
+                       CONSTRAINT FK_Unidad_Medida
+                       FOREIGN KEY (id_medida) REFERENCES Unidad_Medida(id_medida));
+
+CREATE TABLE Obra(id_obra int not null AUTO_INCREMENT, descripcion text,
+                 id_duenio int not null, id_encargado int not null,
+                 direccion text, id_ciudad int not null,
+                 fecha_inicio date, fecha_fin date,
+                 presupuesto_inicial float, id_status tinyint not null,
+                 CONSTRAINT PK_Obra PRIMARY KEY (id_obra),
+                 CONSTRAINT FK_Duenio
+                 FOREIGN KEY (id_duenio) REFERENCES Duenio(id_duenio),
+                 CONSTRAINT FK_Encargado
+                 FOREIGN KEY (id_encargado) REFERENCES Encargado(id_encargado),
+                 CONSTRAINT FK_Ciudad
+                 FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad),
+		 CONSTRAINT FK_Status
+                 FOREIGN KEY (id_status) REFERENCES Status(id_status));
+
+CREATE TABLE TrabajadoresObra(id_obra int not null, id_trabajador int not null,
+                             sueldo float, fecha_contrato date, fecha_fin date,
+                             CONSTRAINT PK_TrabajadoresObra PRIMARY KEY(id_obra,id_trabajador),
+                             CONSTRAINT FK_Obra
+                             FOREIGN KEY (id_obra) REFERENCES Obra(id_obra),
+                             CONSTRAINT FK_Trabajadores
+                             FOREIGN KEY (id_trabajador) REFERENCES Trabajadores(id_trabajador));
+
+CREATE TABLE Adquisiciones(id_adqui bigint not null AUTO_INCREMENT, id_material int not null,
+                          id_proveedor SMALLINT not null, fecha date, cantidad float,
+                          precio_compra float,
+                          CONSTRAINT PK_Adquisiciones PRIMARY KEY (id_adqui),
+                          CONSTRAINT FK_Materiales
+                          FOREIGN KEY (id_material) REFERENCES Materiales(id_material),
+                          CONSTRAINT FK_Proveedores
+                          FOREIGN KEY (id_proveedor) REFERENCES Proveedores(id_proveedor));
+
+CREATE TABLE ListadoMateriales(id_list bigint not null AUTO_INCREMENT, id_obra int not null,
+                              id_material int not null, cantidad float, fecha date,
+                              CONSTRAINT PK_ListadoMateriales PRIMARY KEY (id_list),
+                              CONSTRAINT FK_Obra1
+                              FOREIGN KEY (id_obra) REFERENCES Obra(id_obra),
+                              CONSTRAINT FK_Materiales1
+                              FOREIGN KEY (id_material) REFERENCES Materiales(id_material));
+
+CREATE TABLE Usuarios(id_usuario int not null AUTO_INCREMENT, 
+                      nombre_usuario varchar(255),password varchar(255),
+                      nombre varchar(255),apepat varchar(255),
+                      apemat varchar(255), foto text,
+                      CONSTRAINT PK_Usuarios PRIMARY KEY(id_usuario));
